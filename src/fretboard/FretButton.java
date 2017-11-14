@@ -171,4 +171,11 @@ public class FretButton extends JButton {
 		this.setRolloverEnabled(true);
 	}
 
+	/**
+	 * @return the type
+	 */
+	public FretButtonType getType() {
+		return type;
+	}
+
 }

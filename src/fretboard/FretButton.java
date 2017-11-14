@@ -37,25 +37,25 @@ public class FretButton extends JButton {
 	}
 
 	// Paths to images that we may use:
-	private static final String BAR_STANDARD_PATH = "../fret_icons/png/bar.png";
+	private static final String BAR_STANDARD_PATH = "./fret_icons/png/bar.png";
 	// private static final String BAR_STANDARD_PATH =
-	// "../fret_icons/png/bar_x.png";
+	// "./fret_icons/png/bar_x.png";
 	// private static final String BAR_STANDARD_PATH =
-	// "../fret_icons/png/bar_x_blue.png";
-	private static final String BAR_FRETTED_PATH = "../fret_icons/png/bar_fretted.png";
-	private static final String BAR_ROLLOVER_PATH = "../fret_icons/png/bar_roll.png";
+	// "./fret_icons/png/bar_x_blue.png";
+	private static final String BAR_FRETTED_PATH = "./fret_icons/png/bar_fretted.png";
+	private static final String BAR_ROLLOVER_PATH = "./fret_icons/png/bar_roll.png";
 
-	private static final String REGULAR_STANDARD_PATH = "../fret_icons/png/reg.png";
-	private static final String REGULAR_FRETTED_PATH = "../fret_icons/png/reg_fretted.png";
-	private static final String REGULAR_ROLLOVER_PATH = "../fret_icons/png/reg_roll.png";
+	private static final String REGULAR_STANDARD_PATH = "./fret_icons/png/reg.png";
+	private static final String REGULAR_FRETTED_PATH = "./fret_icons/png/reg_fretted.png";
+	private static final String REGULAR_ROLLOVER_PATH = "./fret_icons/png/reg_roll.png";
 
-	private static final String LEFT_DOT_STANDARD_PATH = "../fret_icons/png/left.png";
-	private static final String LEFT_DOT_FRETTED_PATH = "../fret_icons/png/left_fretted.png";
-	private static final String LEFT_DOT_ROLLOVER_PATH = "../fret_icons/png/left_roll.png";
+	private static final String LEFT_DOT_STANDARD_PATH = "./fret_icons/png/left.png";
+	private static final String LEFT_DOT_FRETTED_PATH = "./fret_icons/png/left_fretted.png";
+	private static final String LEFT_DOT_ROLLOVER_PATH = "./fret_icons/png/left_roll.png";
 
-	private static final String RIGHT_DOT_STANDARD_PATH = "../fret_icons/png/right.png";
-	private static final String RIGHT_DOT_FRETTED_PATH = "../fret_icons/png/right_fretted.png";
-	private static final String RIGHT_DOT_ROLLOVER_PATH = "../fret_icons/png/right_roll.png";
+	private static final String RIGHT_DOT_STANDARD_PATH = "./fret_icons/png/right.png";
+	private static final String RIGHT_DOT_FRETTED_PATH = "./fret_icons/png/right_fretted.png";
+	private static final String RIGHT_DOT_ROLLOVER_PATH = "./fret_icons/png/right_roll.png";
 
 	// The resulting ImageIcons:
 	private static final ImageIcon BAR_STANDARD = getImageIconFromFileString(BAR_STANDARD_PATH);
@@ -169,10 +169,11 @@ public class FretButton extends JButton {
 	void unset() {
 		this.setIcon(this.unfrettedIcon);
 		this.setRolloverEnabled(true);
+		this.getModel().setRollover(false);
 	}
 
 	/**
-	 * @return the type
+	 * @return the FretButtonType of this FretButton.
 	 */
 	public FretButtonType getType() {
 		return type;

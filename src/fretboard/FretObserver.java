@@ -7,6 +7,8 @@ import javax.swing.JLabel;
  * string of a stringed instrument, unfortunately, there is apparently already a
  * class called String. Called FretObserver, as a nod to the design pattern that
  * this vaguely suggests/mimics.
+ * 
+ * @author jkwinta
  */
 public class FretObserver {
 
@@ -107,7 +109,7 @@ public class FretObserver {
 	 * @param pressed
 	 */
 	void fretButtonPress(int pressed) {
-		if (pressed == this.fretted){
+		if (pressed == this.fretted) {
 			this.setFretted(-1);
 		} else {
 			this.setFretted(pressed);
@@ -127,10 +129,12 @@ public class FretObserver {
 			return;
 		} else if (this.fretted == toFret) {
 			return;
-		} else{
-			this.frets[this.fretted].unset();
+		} else {
+			if (this.fretted != -1) {
+				this.frets[this.fretted].unset();
+			}
 			this.fretted = toFret;
-			if (toFret != -1){
+			if (toFret != -1) {
 				this.frets[this.fretted].set();
 			}
 		}

@@ -4,8 +4,7 @@ import java.awt.GridLayout;
 import java.awt.HeadlessException;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
+
 
 /**
  * The JFrame that handles building the interactive Fretboard.
@@ -29,7 +28,7 @@ public class Fretboard extends JFrame {
 	final static int DEFAULT_NUMBER_OF_FRETS = 21;
 
 	/** Array of FretObservers each representing instrument strings. */
-	private FretObserver[] strings;
+	private FretHandler[] strings;
 
 	/**
 	 * Constructor for this Fretboard object.
@@ -43,12 +42,13 @@ public class Fretboard extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLayout(new GridLayout(numberOfFrets + 2, numberOfStrings, GRID_LAYOUT_GAP, GRID_LAYOUT_GAP));
 		// Assemble the Fretboard:
-		this.strings = new FretObserver[numberOfStrings];
-		JLabel newLabel;
+		this.strings = new FretHandler[numberOfStrings];
+		FretDisplayLabel newLabel;
 		// Add labels at top:
 		for (int i = 0; i < numberOfStrings; i++) {
-			newLabel = new JLabel("", SwingConstants.CENTER);
-			this.strings[i] = new FretObserver(numberOfFrets, newLabel);
+			newLabel = new FretDisplayLabel();
+			this.strings[i] = new FretHandler(numberOfFrets);
+			this.strings[i].addObserverAndUpdate(newLabel);
 			this.add(newLabel);
 		}
 		// Add buttons:

@@ -92,7 +92,7 @@ public class FretButton extends JButton {
 	 * The parent that manages the collection of FretButton objects comprising a
 	 * "string"
 	 */
-	private FretObserver stringParent;
+	private FretHandler stringParent;
 
 	/**
 	 * The icons to use for when a given note is fretted or not
@@ -117,7 +117,7 @@ public class FretButton extends JButton {
 	 * @param type
 	 *            The type that prescribes what icons to use
 	 */
-	FretButton(int fretNumber, FretObserver stringParent, FretButtonType type) {
+	FretButton(int fretNumber, FretHandler stringParent, FretButtonType type) {
 		super();
 		this.fretNumber = fretNumber;
 		this.stringParent = stringParent;

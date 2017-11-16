@@ -20,8 +20,24 @@ public class FretDisplayLabel extends JLabel implements Observer {
 		this(UNFRETTED_STRING);
 	}
 
-	public FretDisplayLabel(String text) {
+	private FretDisplayLabel(String text) {
 		super(text, SwingConstants.CENTER);
+	}
+
+	static String getDisplayString(int i) {
+		if (i < 0) {
+			return UNFRETTED_STRING;
+		} else {
+			return String.valueOf(i);
+		}
+	}
+
+	static String getDisplayString(int i, int numberOfFrets) {
+		if (i > numberOfFrets) {
+			return UNFRETTED_STRING;
+		} else {
+			return getDisplayString(i);
+		}
 	}
 
 	@Override
@@ -29,11 +45,7 @@ public class FretDisplayLabel extends JLabel implements Observer {
 		if (o instanceof FretHandler) {
 			FretHandler fh = (FretHandler) o;
 			int fretted = fh.getFretted();
-			if (fretted == -1) {
-				this.setText(UNFRETTED_STRING);
-			} else {
-				this.setText(String.valueOf(fretted));
-			}
+			this.setText(getDisplayString(fretted));
 		}
 
 	}

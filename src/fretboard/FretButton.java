@@ -78,7 +78,7 @@ public class FretButton extends JButton {
 	 * Each FretButton has a type that will prescribe what ImageIcon objects it
 	 * will use.
 	 */
-	static enum FretButtonType {
+	public static enum FretButtonType {
 		BAR, LEFT_DOT, RIGHT_DOT, REGULAR
 	};
 

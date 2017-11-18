@@ -1,6 +1,9 @@
 package fretboard;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 import fretboard.FretButton.FretButtonType;
 
@@ -77,6 +80,10 @@ public class FretboardLayoutFactory {
 		}
 		return row;
 	}
+	
+//	Set<Integer> singleDot = new HashSet<Integer>(Arrays.asList(3, 5, 7, 9, 15, 17, 19, 21));
+//	Set<Integer> doubleDot = new HashSet<Integer>(Arrays.asList(12, 24));
+
 	
 	
 

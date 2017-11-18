@@ -23,13 +23,16 @@ public class FretboardLayoutFactory {
 		if (style == FretboardStyle.STANDARD) {
 			return getStandardLayout(numberOfStrings, numberOfFrets);
 		}
-		FretButtonType[][] layout = new FretButtonType[numberOfFrets][numberOfStrings];
+		FretButtonType[][] layout = new FretButtonType[numberOfFrets + 1][numberOfStrings];
 		return layout;
 	}
 
 	private static FretButtonType[][] getStandardLayout(int numberOfStrings, int numberOfFrets) {
-		FretButtonType[][] layout = new FretButtonType[numberOfFrets][numberOfStrings];
+		FretButtonType[][] layout = new FretButtonType[numberOfFrets + 1][numberOfStrings];
 		layout[0] = getBarRow(numberOfStrings);
+		for (int i = 1; i < numberOfFrets + 1; i++){
+			layout[i] = getDottedRow(getNumberOfDots(i, FretboardStyle.STANDARD), numberOfStrings);
+		}
 		return layout;
 	}
 
@@ -53,5 +56,28 @@ public class FretboardLayoutFactory {
 		}
 		return 0;
 	}
+
+	private static FretButtonType[] getDottedRow(int numberOfDots, int numberOfStrings) {
+		if (numberOfDots == 1 && numberOfStrings == 6) {
+			return new FretButtonType[] { FretButtonType.REGULAR, FretButtonType.REGULAR, FretButtonType.LEFT_DOT,
+					FretButtonType.RIGHT_DOT, FretButtonType.REGULAR, FretButtonType.REGULAR };
+		} else if (numberOfDots == 2 && numberOfStrings == 6) {
+			return new FretButtonType[] { FretButtonType.REGULAR, FretButtonType.LEFT_DOT, FretButtonType.RIGHT_DOT,
+					FretButtonType.LEFT_DOT, FretButtonType.RIGHT_DOT, FretButtonType.REGULAR };
+		} else if (numberOfDots == 1 && numberOfStrings == 4) {
+			return new FretButtonType[] { FretButtonType.REGULAR, FretButtonType.LEFT_DOT, FretButtonType.RIGHT_DOT,
+					FretButtonType.REGULAR };
+		} else if (numberOfDots == 2 && numberOfStrings == 4) {
+			return new FretButtonType[] { FretButtonType.LEFT_DOT, FretButtonType.RIGHT_DOT, FretButtonType.LEFT_DOT,
+					FretButtonType.RIGHT_DOT };
+		}
+		FretButtonType[] row = new FretButtonType[numberOfStrings];
+		for (int i = 0; i < numberOfStrings; i++) {
+			row[i] = FretButtonType.REGULAR;
+		}
+		return row;
+	}
+	
+	
 
 }

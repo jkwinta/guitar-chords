@@ -1,28 +1,35 @@
 package fretboard;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
-
 import fretboard.FretButton.FretButtonType;
 
-public class FretboardLayoutFactory {
-
-	public FretboardLayoutFactory() {
-		// TODO Auto-generated constructor stub
-	}
+public class FretboardLayout {
 
 	/**
 	 * Possible included fretboard dot decoration configurations.
 	 */
-	static enum FretboardStyle {
-		STANDARD
+	enum FretboardStyle {
+		STANDARD, BLANK
 	};
 
-	static HashMap<Integer, Integer> a;
+	private FretButtonType[][] layout;
+	private FretboardStyle style;
 
-	static FretButtonType[][] getLayout(int numberOfStrings, int numberOfFrets, FretboardStyle style) {
+	// static HashMap<Integer, Set<Integer>> a;
+
+	public FretboardLayout(int numberOfStrings, int numberOfFrets, FretboardStyle style) {
+		this.layout = new FretButtonType[numberOfFrets + 1][numberOfStrings];
+		this.style = style;
+	}
+
+	/**
+	 * Return a FretboardLayout
+	 * 
+	 * @param numberOfStrings
+	 * @param numberOfFrets
+	 * @param style
+	 * @return
+	 */
+	static FretButtonType[][] getFretboardLayout(int numberOfStrings, int numberOfFrets, FretboardStyle style) {
 		if (style == FretboardStyle.STANDARD) {
 			return getStandardLayout(numberOfStrings, numberOfFrets);
 		}
@@ -33,7 +40,7 @@ public class FretboardLayoutFactory {
 	private static FretButtonType[][] getStandardLayout(int numberOfStrings, int numberOfFrets) {
 		FretButtonType[][] layout = new FretButtonType[numberOfFrets + 1][numberOfStrings];
 		layout[0] = getBarRow(numberOfStrings);
-		for (int i = 1; i < numberOfFrets + 1; i++){
+		for (int i = 1; i < numberOfFrets + 1; i++) {
 			layout[i] = getDottedRow(getNumberOfDots(i, FretboardStyle.STANDARD), numberOfStrings);
 		}
 		return layout;
@@ -80,11 +87,9 @@ public class FretboardLayoutFactory {
 		}
 		return row;
 	}
-	
-//	Set<Integer> singleDot = new HashSet<Integer>(Arrays.asList(3, 5, 7, 9, 15, 17, 19, 21));
-//	Set<Integer> doubleDot = new HashSet<Integer>(Arrays.asList(12, 24));
 
-	
-	
+	// Set<Integer> singleDot = new HashSet<Integer>(Arrays.asList(3, 5, 7, 9,
+	// 15, 17, 19, 21));
+	// Set<Integer> doubleDot = new HashSet<Integer>(Arrays.asList(12, 24));
 
 }

@@ -11,81 +11,95 @@ public class FretboardLayout {
 		STANDARD, BLANK
 	};
 
-	private FretButtonType[][] layout;
+	/** This FretboardLayout object's style given when constructed. */
 	private FretboardStyle style;
+
+	/** This FretboardLayout object's array of FretButtonTypes */
+	private FretButtonType[][] layout;
 
 	// static HashMap<Integer, Set<Integer>> a;
 
-	public FretboardLayout(int numberOfStrings, int numberOfFrets, FretboardStyle style) {
-		this.layout = new FretButtonType[numberOfFrets + 1][numberOfStrings];
-		this.style = style;
-	}
-
 	/**
-	 * Return a FretboardLayout
+	 * The constructor for a new FretboardLayout given the number of strings,
+	 * number of frets, and a style for the dots.
 	 * 
 	 * @param numberOfStrings
+	 *            The number of instrument strings to be represented.
 	 * @param numberOfFrets
+	 *            The number of instrument frets to be represented, the array
+	 *            has 1 more row than this to accommodate representation of the
+	 *            string played open.
 	 * @param style
-	 * @return
+	 *            The style for this Fretboard to be built as.
 	 */
-	static FretButtonType[][] getFretboardLayout(int numberOfStrings, int numberOfFrets, FretboardStyle style) {
-		if (style == FretboardStyle.STANDARD) {
-			return getStandardLayout(numberOfStrings, numberOfFrets);
-		}
-		FretButtonType[][] layout = new FretButtonType[numberOfFrets + 1][numberOfStrings];
-		return layout;
-	}
-
-	private static FretButtonType[][] getStandardLayout(int numberOfStrings, int numberOfFrets) {
-		FretButtonType[][] layout = new FretButtonType[numberOfFrets + 1][numberOfStrings];
-		layout[0] = getBarRow(numberOfStrings);
-		for (int i = 1; i < numberOfFrets + 1; i++) {
-			layout[i] = getDottedRow(getNumberOfDots(i, FretboardStyle.STANDARD), numberOfStrings);
-		}
-		return layout;
-	}
-
-	private static FretButtonType[] getBarRow(int numberOfStrings) {
-		FretButtonType[] row = new FretButtonType[numberOfStrings];
+	public FretboardLayout(int numberOfStrings, int numberOfFrets, FretboardStyle style) {
+		this.style = style;
+		// We initially set a blank layout, regardless
+		this.layout = new FretButtonType[numberOfFrets + 1][numberOfStrings];
+		// Bar row first:
 		for (int i = 0; i < numberOfStrings; i++) {
-			row[i] = FretButtonType.BAR;
+			this.layout[0][i] = FretButtonType.BAR;
 		}
-		return row;
-	}
-
-	private static int getNumberOfDots(int fretNumber, FretboardStyle style) {
-		if (style == FretboardStyle.STANDARD) {
-			if (fretNumber % 12 == 0) {
-				return 2;
-			} else if (fretNumber % 2 == 1 && (fretNumber + 1) % 12 != 0 && (fretNumber - 1) % 12 != 0) {
-				return 1;
-			} else {
-				return 0;
+		// Then the rest of the frets:
+		for (int j = 1; j <= numberOfFrets; j++) {
+			for (int i = 0; i < numberOfStrings; i++) {
+				this.layout[j][i] = FretButtonType.REGULAR;
 			}
 		}
-		return 0;
+		// Now decorate according to style argument:
+		if (style == FretboardStyle.STANDARD) {
+			this.setStandardLayout(numberOfStrings, numberOfFrets);
+		}
 	}
 
-	private static FretButtonType[] getDottedRow(int numberOfDots, int numberOfStrings) {
-		if (numberOfDots == 1 && numberOfStrings == 6) {
-			return new FretButtonType[] { FretButtonType.REGULAR, FretButtonType.REGULAR, FretButtonType.LEFT_DOT,
-					FretButtonType.RIGHT_DOT, FretButtonType.REGULAR, FretButtonType.REGULAR };
-		} else if (numberOfDots == 2 && numberOfStrings == 6) {
-			return new FretButtonType[] { FretButtonType.REGULAR, FretButtonType.LEFT_DOT, FretButtonType.RIGHT_DOT,
-					FretButtonType.LEFT_DOT, FretButtonType.RIGHT_DOT, FretButtonType.REGULAR };
-		} else if (numberOfDots == 1 && numberOfStrings == 4) {
-			return new FretButtonType[] { FretButtonType.REGULAR, FretButtonType.LEFT_DOT, FretButtonType.RIGHT_DOT,
-					FretButtonType.REGULAR };
-		} else if (numberOfDots == 2 && numberOfStrings == 4) {
-			return new FretButtonType[] { FretButtonType.LEFT_DOT, FretButtonType.RIGHT_DOT, FretButtonType.LEFT_DOT,
-					FretButtonType.RIGHT_DOT };
+	private void setStandardLayout(int numberOfStrings, int numberOfFrets) {
+		// This isn't perfect, but works for 4 and 6 strings well enough, and
+		// makes some sense if you think about it.
+		for (int i = 1; i <= numberOfFrets; i++) {
+			int numberOfDots = standardNumberOfDots(i);
+			if (numberOfDots == 1) {
+				this.layout[i][numberOfStrings / 2] = FretButtonType.RIGHT_DOT;
+				this.layout[i][numberOfStrings / 2 - 1] = FretButtonType.LEFT_DOT;
+			} else if (numberOfDots == 2) {
+				this.layout[i][numberOfStrings / 3] = FretButtonType.RIGHT_DOT;
+				this.layout[i][numberOfStrings / 3 - 1] = FretButtonType.LEFT_DOT;
+				this.layout[i][numberOfStrings - numberOfStrings / 3] = FretButtonType.RIGHT_DOT;
+				this.layout[i][numberOfStrings - numberOfStrings / 3 - 1] = FretButtonType.LEFT_DOT;
+			}
 		}
-		FretButtonType[] row = new FretButtonType[numberOfStrings];
-		for (int i = 0; i < numberOfStrings; i++) {
-			row[i] = FretButtonType.REGULAR;
+	}
+
+	public FretboardStyle getStyle() {
+		return this.style;
+	}
+
+	 public int getNumberOfStrings() {
+	 return this.layout[0].length;
+	 }
+	
+	 public int getNumberOfFrets() {
+	 return this.layout.length - 1;
+	 }
+
+	/**
+	 * Return the number of dots that appear on fret fretNumber of a standard
+	 * guitar or bass.
+	 * 
+	 * @param fretNumber
+	 *            The number of the fret.
+	 * @return The number of dots that appear on a standard fretboard layout at
+	 *         fret fretNumber.
+	 */
+	private static int standardNumberOfDots(int fretNumber) {
+		int mod12 = fretNumber % 12;
+		if (mod12 == 0) {
+			return 2;
+		} else if (mod12 % 2 == 1 && mod12 % 10 != 1) {
+			// modulo 12 preserves parity. We want a single dot where odd and
+			// not 1 or 11
+			return 1;
 		}
-		return row;
+		return 0;
 	}
 
 	// Set<Integer> singleDot = new HashSet<Integer>(Arrays.asList(3, 5, 7, 9,

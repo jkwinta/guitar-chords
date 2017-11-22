@@ -41,11 +41,10 @@ public class FretHandler extends Observable {
 		this.fretted = -1;
 		this.frets = new FretButton[numberOfFrets + 1];
 	}
-	
-	public void addObserverAndUpdate(Observer o){
+
+	public void addObserverAndUpdate(Observer o) {
 		this.addObserver(o);
-		this.setChanged();
-		this.notifyObservers();
+		o.update(this, null);
 	}
 
 	/**

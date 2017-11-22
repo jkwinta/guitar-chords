@@ -52,6 +52,15 @@ public class FretboardLayout {
 		}
 	}
 
+	/**
+	 * Add dot decorations to this FretboardLayout in the standard
+	 * configuration.
+	 * 
+	 * @param numberOfStrings
+	 *            The number of strings that this FretboardLayout prescribes.
+	 * @param numberOfFrets
+	 *            The number of frets that this FretboardLayout prescribes.
+	 */
 	private void setStandardLayout(int numberOfStrings, int numberOfFrets) {
 		// This isn't perfect, but works for 4 and 6 strings well enough, and
 		// makes some sense if you think about it.
@@ -69,17 +78,47 @@ public class FretboardLayout {
 		}
 	}
 
+	/**
+	 * Return the FretButtonType that this FreboardLayout has at fret fretNumber
+	 * on string stringNumber.
+	 * 
+	 * @param stringNumber
+	 *            The number of the instrument string.
+	 * @param fretNumber
+	 *            The number of the fret.
+	 * @return The FretButtonType that occurs at fretNumber on stringNumber.
+	 */
+	public FretButtonType getTypeAt(int stringNumber, int fretNumber) {
+		return this.layout[fretNumber][stringNumber];
+	}
+
+	/**
+	 * Return this FretboardLayout object's FretboardStyle.
+	 * 
+	 * @return The FretboardStyle of this FretboardLayout.
+	 */
 	public FretboardStyle getStyle() {
 		return this.style;
 	}
 
-	 public int getNumberOfStrings() {
-	 return this.layout[0].length;
-	 }
-	
-	 public int getNumberOfFrets() {
-	 return this.layout.length - 1;
-	 }
+	/**
+	 * Return the number of strings that this FretboardLayout prescribes.
+	 * 
+	 * @return The number instrument strings represented in this
+	 *         FretboardLayout.
+	 */
+	public int getNumberOfStrings() {
+		return this.layout[0].length;
+	}
+
+	/**
+	 * Return the number of frets that this FretboardLayout prescribes.
+	 * 
+	 * @return The number of frets represented in this FretboardLayout.
+	 */
+	public int getNumberOfFrets() {
+		return this.layout.length - 1;
+	}
 
 	/**
 	 * Return the number of dots that appear on fret fretNumber of a standard

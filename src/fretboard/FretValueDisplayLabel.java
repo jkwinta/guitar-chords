@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial") // No serialization, yet
-public class FretDisplayLabel extends JLabel implements Observer {
+public class FretValueDisplayLabel extends JLabel implements Observer {
 
 	/**
 	 * The String that gets displayed on the label for a string that is not
@@ -16,11 +16,11 @@ public class FretDisplayLabel extends JLabel implements Observer {
 	static String UNFRETTED_STRING = "X";
 	// static String UNFRETTED_STRING = "|";
 
-	public FretDisplayLabel() {
+	public FretValueDisplayLabel() {
 		this(UNFRETTED_STRING);
 	}
 
-	private FretDisplayLabel(String text) {
+	private FretValueDisplayLabel(String text) {
 		super(text, SwingConstants.CENTER);
 	}
 

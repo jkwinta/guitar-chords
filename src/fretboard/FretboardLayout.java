@@ -145,4 +145,14 @@ public class FretboardLayout {
 	// 15, 17, 19, 21));
 	// Set<Integer> doubleDot = new HashSet<Integer>(Arrays.asList(12, 24));
 
+	public static void main(String args[]){
+		System.out.println("Test");
+		FretboardLayout A = new FretboardLayout(6, 21, FretboardStyle.STANDARD);
+		for (int i = 0; i <= A.getNumberOfFrets(); i++){
+			for (int j = 0; j < A.getNumberOfStrings(); j++){
+				System.out.print(A.getTypeAt(j, i) + " ");
+			}
+			System.out.println("");
+		}
+	}
 }

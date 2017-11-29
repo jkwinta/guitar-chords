@@ -1,14 +1,9 @@
 package fretboard;
 
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -62,25 +57,11 @@ public class FretButton extends JButton {
 		this.fretNumber = fretNumber;
 		this.stringParent = stringParent;
 		this.style = style;
-		Icon rollover;
-		if (type == FretButtonType.BAR) {
-			this.unfrettedIcon = BAR_STANDARD;
-			this.frettedIcon = BAR_FRETTED;
-			rollover = BAR_ROLLOVER;
-		} else if (type == FretButtonType.LEFT_DOT) {
-			this.unfrettedIcon = LEFT_DOT_STANDARD;
-			this.frettedIcon = LEFT_DOT_FRETTED;
-			rollover = LEFT_DOT_ROLLOVER;
-		} else if (type == FretButtonType.RIGHT_DOT) {
-			this.unfrettedIcon = RIGHT_DOT_STANDARD;
-			this.frettedIcon = RIGHT_DOT_FRETTED;
-			rollover = RIGHT_DOT_ROLLOVER;
-		} else {
-			this.unfrettedIcon = REGULAR_STANDARD;
-			this.frettedIcon = REGULAR_FRETTED;
-			rollover = REGULAR_ROLLOVER;
-		}
-		this.setRolloverIcon(rollover);
+
+		this.unfrettedIcon = FretIcons.getStandardIcon(style);
+		this.frettedIcon = FretIcons.getFrettedIcon(style);
+		this.setRolloverIcon(FretIcons.getRolloverIcon(style));
+
 		this.setBorder(BorderFactory.createEmptyBorder());
 		this.unset();
 		this.addActionListener(new ActionListener() {

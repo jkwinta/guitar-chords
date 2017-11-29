@@ -65,6 +65,7 @@ public class FretHandler extends Observable {
 	 * @return Whether or not a FretButton can be added.
 	 */
 	boolean hasRoom() {
+		// Note: LESS THAN OR EQUAL accounted for open string, fretted = 0.
 		return this.fretsAdded <= this.getNumberOfFrets();
 	}
 

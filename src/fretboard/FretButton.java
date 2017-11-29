@@ -12,6 +12,8 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+import fretboard.FretIcons.FretIconStyle;
+
 /**
  * A button as the atomic component of an interactive fretboard.
  * 
@@ -20,67 +22,6 @@ import javax.swing.JButton;
  */
 @SuppressWarnings("serial") // No need to serialize, at this point.
 public class FretButton extends JButton {
-
-	/**
-	 * Return an ImageIcon read from the image file at path.
-	 */
-	private static ImageIcon getImageIconFromFileString(String path) {
-		File f = new File(path);
-		Image im = null;
-		try {
-			im = ImageIO.read(f);
-		} catch (IOException e) {
-			System.out.println("Hey there buster, you're missing an icon file at " + path);
-			System.exit(1);
-		}
-		return new ImageIcon(im);
-	}
-
-	// Paths to images that we may use:
-	private static final String BAR_STANDARD_PATH = "./fret_icons/png/bar.png";
-	// private static final String BAR_STANDARD_PATH =
-	// "./fret_icons/png/bar_x.png";
-	// private static final String BAR_STANDARD_PATH =
-	// "./fret_icons/png/bar_x_blue.png";
-	private static final String BAR_FRETTED_PATH = "./fret_icons/png/bar_fretted.png";
-	private static final String BAR_ROLLOVER_PATH = "./fret_icons/png/bar_roll.png";
-
-	private static final String REGULAR_STANDARD_PATH = "./fret_icons/png/reg.png";
-	private static final String REGULAR_FRETTED_PATH = "./fret_icons/png/reg_fretted.png";
-	private static final String REGULAR_ROLLOVER_PATH = "./fret_icons/png/reg_roll.png";
-
-	private static final String LEFT_DOT_STANDARD_PATH = "./fret_icons/png/left.png";
-	private static final String LEFT_DOT_FRETTED_PATH = "./fret_icons/png/left_fretted.png";
-	private static final String LEFT_DOT_ROLLOVER_PATH = "./fret_icons/png/left_roll.png";
-
-	private static final String RIGHT_DOT_STANDARD_PATH = "./fret_icons/png/right.png";
-	private static final String RIGHT_DOT_FRETTED_PATH = "./fret_icons/png/right_fretted.png";
-	private static final String RIGHT_DOT_ROLLOVER_PATH = "./fret_icons/png/right_roll.png";
-
-	// The resulting ImageIcons:
-	private static final ImageIcon BAR_STANDARD = getImageIconFromFileString(BAR_STANDARD_PATH);
-	private static final ImageIcon BAR_FRETTED = getImageIconFromFileString(BAR_FRETTED_PATH);
-	private static final ImageIcon BAR_ROLLOVER = getImageIconFromFileString(BAR_ROLLOVER_PATH);
-
-	private static final ImageIcon REGULAR_STANDARD = getImageIconFromFileString(REGULAR_STANDARD_PATH);
-	private static final ImageIcon REGULAR_FRETTED = getImageIconFromFileString(REGULAR_FRETTED_PATH);
-	private static final ImageIcon REGULAR_ROLLOVER = getImageIconFromFileString(REGULAR_ROLLOVER_PATH);
-
-	private static final ImageIcon LEFT_DOT_STANDARD = getImageIconFromFileString(LEFT_DOT_STANDARD_PATH);
-	private static final ImageIcon LEFT_DOT_FRETTED = getImageIconFromFileString(LEFT_DOT_FRETTED_PATH);
-	private static final ImageIcon LEFT_DOT_ROLLOVER = getImageIconFromFileString(LEFT_DOT_ROLLOVER_PATH);
-
-	private static final ImageIcon RIGHT_DOT_STANDARD = getImageIconFromFileString(RIGHT_DOT_STANDARD_PATH);
-	private static final ImageIcon RIGHT_DOT_FRETTED = getImageIconFromFileString(RIGHT_DOT_FRETTED_PATH);
-	private static final ImageIcon RIGHT_DOT_ROLLOVER = getImageIconFromFileString(RIGHT_DOT_ROLLOVER_PATH);
-
-	/**
-	 * Each FretButton has a type that will prescribe what ImageIcon objects it
-	 * will use.
-	 */
-	public static enum FretButtonType {
-		BAR, LEFT_DOT, RIGHT_DOT, REGULAR
-	};
 
 	/**
 	 * The fret number that this button represents, to send back to the parent
@@ -103,7 +44,7 @@ public class FretButton extends JButton {
 	 * The type that prescribes what icons to use, this may not be needed,
 	 * eventually
 	 */
-	private FretButtonType type;
+	private FretIconStyle style;
 
 	/**
 	 * Constructor for new FretButton from a number to pass and the parent to
@@ -117,11 +58,11 @@ public class FretButton extends JButton {
 	 * @param type
 	 *            The type that prescribes what icons to use
 	 */
-	FretButton(int fretNumber, FretHandler stringParent, FretButtonType type) {
+	FretButton(int fretNumber, FretHandler stringParent, FretIconStyle style) {
 		super();
 		this.fretNumber = fretNumber;
 		this.stringParent = stringParent;
-		this.type = type;
+		this.style = style;
 		Icon rollover;
 		if (type == FretButtonType.BAR) {
 			this.unfrettedIcon = BAR_STANDARD;
@@ -173,10 +114,10 @@ public class FretButton extends JButton {
 	}
 
 	/**
-	 * @return the FretButtonType of this FretButton.
+	 * @return the FretIconStyle of this FretButton.
 	 */
-	public FretButtonType getType() {
-		return type;
+	public FretIconStyle getStyle() {
+		return style;
 	}
 
 }

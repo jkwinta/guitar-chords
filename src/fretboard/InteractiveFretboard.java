@@ -66,29 +66,23 @@ public class InteractiveFretboard extends JFrame {
 			this.add(newLabel);
 		}
 		// Add buttons:
-		
-		// TODO: HERE
-		// HERE
-		// Too much egg nog
-		
 		FretButton newButton;
 		int fretNumber, stringNumber, numberOfButtons;
 		numberOfButtons = numberOfStrings * (numberOfFrets + 1);
 		for (int i = 0; i < numberOfButtons; i++) {
 			fretNumber = i / numberOfStrings;
 			stringNumber = i % numberOfStrings;
-			if (fretNumber == 0) {
-				newButton = new FretButton(fretNumber, this.strings[stringNumber], FretButton.FretButtonType.BAR);
-			} else {
-				newButton = new FretButton(fretNumber, this.strings[stringNumber], FretButton.FretButtonType.REGULAR);
-			}
+			newButton = new FretButton(fretNumber, this.strings[stringNumber], layout.getTypeAt(stringNumber, fretNumber));
 			this.strings[stringNumber].addFretButton(newButton);
 			this.add(newButton);
 		}
 		// Finish and show frame:
 		this.pack();
 		this.setVisible(true);
-
+	}
+	
+	public FretboardLayout getFretboardLayout(){
+		return this.layout;
 	}
 
 	public static void main(String[] args) {

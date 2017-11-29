@@ -41,22 +41,21 @@ public class FretButton extends JButton {
 	private ImageIcon frettedIcon, unfrettedIcon;
 
 	/**
-	 * The type that prescribes what icons to use, this may not be needed,
-	 * eventually
+	 * The FretIconStyle that prescribes what icons to use
 	 */
 	private FretIconStyle style;
 
 	/**
 	 * Constructor for new FretButton from a number to pass and the parent to
-	 * pass it to when clicked, and the type of images to use.
+	 * pass it to when clicked, and the style of images to use.
 	 * 
 	 * @param fretNumber
 	 *            The fret number that this button represents, passed upon click
 	 * @param stringParent
 	 *            The parent that handles the string, to which the fretNumber is
 	 *            passed on click
-	 * @param type
-	 *            The type that prescribes what icons to use
+	 * @param style
+	 *            The style that prescribes what icons to use
 	 */
 	FretButton(int fretNumber, FretHandler stringParent, FretIconStyle style) {
 		super();

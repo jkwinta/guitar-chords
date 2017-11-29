@@ -1,6 +1,6 @@
 package fretboard;
 
-import fretboard.FretButton.FretButtonType;
+import fretboard.FretIcons.FretIconStyle;
 
 public class FretboardLayout {
 
@@ -15,7 +15,7 @@ public class FretboardLayout {
 	private FretboardStyle style;
 
 	/** This FretboardLayout object's array of FretButtonTypes */
-	private FretButtonType[][] layout;
+	private FretIconStyle[][] layout;
 
 	// static HashMap<Integer, Set<Integer>> a;
 
@@ -35,15 +35,15 @@ public class FretboardLayout {
 	public FretboardLayout(int numberOfStrings, int numberOfFrets, FretboardStyle style) {
 		this.style = style;
 		// We initially set a blank layout, regardless
-		this.layout = new FretButtonType[numberOfFrets + 1][numberOfStrings];
+		this.layout = new FretIconStyle[numberOfFrets + 1][numberOfStrings];
 		// Bar row first:
 		for (int i = 0; i < numberOfStrings; i++) {
-			this.layout[0][i] = FretButtonType.BAR;
+			this.layout[0][i] = FretIconStyle.BAR;
 		}
 		// Then the rest of the frets:
 		for (int j = 1; j <= numberOfFrets; j++) {
 			for (int i = 0; i < numberOfStrings; i++) {
-				this.layout[j][i] = FretButtonType.REGULAR;
+				this.layout[j][i] = FretIconStyle.REGULAR;
 			}
 		}
 		// Now decorate according to style argument:
@@ -67,13 +67,13 @@ public class FretboardLayout {
 		for (int i = 1; i <= numberOfFrets; i++) {
 			int numberOfDots = standardNumberOfDots(i);
 			if (numberOfDots == 1) {
-				this.layout[i][numberOfStrings / 2] = FretButtonType.RIGHT_DOT;
-				this.layout[i][numberOfStrings / 2 - 1] = FretButtonType.LEFT_DOT;
+				this.layout[i][numberOfStrings / 2] = FretIconStyle.RIGHT_DOT;
+				this.layout[i][numberOfStrings / 2 - 1] = FretIconStyle.LEFT_DOT;
 			} else if (numberOfDots == 2) {
-				this.layout[i][numberOfStrings / 3] = FretButtonType.RIGHT_DOT;
-				this.layout[i][numberOfStrings / 3 - 1] = FretButtonType.LEFT_DOT;
-				this.layout[i][numberOfStrings - numberOfStrings / 3] = FretButtonType.RIGHT_DOT;
-				this.layout[i][numberOfStrings - numberOfStrings / 3 - 1] = FretButtonType.LEFT_DOT;
+				this.layout[i][numberOfStrings / 3] = FretIconStyle.RIGHT_DOT;
+				this.layout[i][numberOfStrings / 3 - 1] = FretIconStyle.LEFT_DOT;
+				this.layout[i][numberOfStrings - numberOfStrings / 3] = FretIconStyle.RIGHT_DOT;
+				this.layout[i][numberOfStrings - numberOfStrings / 3 - 1] = FretIconStyle.LEFT_DOT;
 			}
 		}
 	}
@@ -88,7 +88,7 @@ public class FretboardLayout {
 	 *            The number of the fret.
 	 * @return The FretButtonType that occurs at fretNumber on stringNumber.
 	 */
-	public FretButtonType getTypeAt(int stringNumber, int fretNumber) {
+	public FretIconStyle getTypeAt(int stringNumber, int fretNumber) {
 		return this.layout[fretNumber][stringNumber];
 	}
 

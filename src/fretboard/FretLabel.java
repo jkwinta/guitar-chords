@@ -5,8 +5,15 @@ import javax.swing.JLabel;
 
 import fretboard.FretIcons.FretIconStyle;
 
+/**
+ * A Label for displaying FretIcons.
+ * 
+ * @author jkwinta
+ *
+ */
 @SuppressWarnings("serial") // No serializing quite yet.
 public class FretLabel extends JLabel {
+
 	// TODO : Check FretButton, this should be similar in construction.
 	// Maybe deal with icon colour, etc. here??
 

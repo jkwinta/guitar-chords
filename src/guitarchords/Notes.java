@@ -18,8 +18,25 @@ public class Notes {
 	// degrees = ("R", "2-", "2+", "3-", "3+", "4P", "4A/5D", "5P", "6-", "6+",
 	// "7-", "7+")
 
-	public Notes() {
-		// TODO Auto-generated constructor stub
+	public static String getNoteName(int note) {
+		return names[note % 12];
 	}
 
+	public static int getNoteOctave(int note) {
+		return (note / 12) + 4;
+	}
+
+	public static String getFullNoteName(int note) {
+		return getNoteName(note) + String.valueOf(getNoteOctave(note));
+	}
+
+	// public Notes() {
+	// // TODO Auto-generated constructor stub
+	// }
+
+	// public static void main(String args[]) {
+	// for (int i = 0; i < 25; i++) {
+	// System.out.println(i + "\t" + getNoteOctave(i));
+	// }
+	// }
 }

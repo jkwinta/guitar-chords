@@ -6,6 +6,7 @@ import java.awt.HeadlessException;
 import javax.swing.JFrame;
 
 import fretboard.FretboardLayout.FretboardStyle;
+import guitarchords.FrettingChooser;
 
 /**
  * The JFrame that handles building the interactive Fretboard.
@@ -14,7 +15,7 @@ import fretboard.FretboardLayout.FretboardStyle;
  *
  */
 @SuppressWarnings("serial") // Not serializing, quite yet
-public class InteractiveFretboard extends JFrame {
+public class InteractiveFretboard extends FrettingChooser {
 
 	/**
 	 * The gap between components in the GridLayout. Used for both horizontal

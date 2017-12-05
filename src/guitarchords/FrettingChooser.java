@@ -12,6 +12,8 @@ import javax.swing.JFrame;
 @SuppressWarnings("serial") // No serializing, yet
 public abstract class FrettingChooser extends JFrame {
 
+	private Chord chord;
+
 	public FrettingChooser() {
 		// TODO Auto-generated constructor stub
 	}
@@ -19,5 +21,7 @@ public abstract class FrettingChooser extends JFrame {
 	public FrettingChooser(String text) {
 		super(text);
 	}
+
+	abstract public void updateFretting(int stringNumber, int newValue);
 
 }

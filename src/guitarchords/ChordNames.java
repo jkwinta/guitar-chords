@@ -1,6 +1,10 @@
 package guitarchords;
 
+import java.util.HashMap;
+
 public class ChordNames {
+	
+	private static HashMap<String, int[]> chordList;
 
 	public ChordNames() {
 		// TODO Auto-generated constructor stub

@@ -29,6 +29,15 @@ public class Notes {
 	public static String getFullNoteName(int note) {
 		return getNoteName(note) + String.valueOf(getNoteOctave(note));
 	}
+	
+	public static String getDegreeName(int root, int other){
+		return getDegreeName(other - root);
+	}
+	
+	public static String getDegreeName(int interval){
+		// TODO
+		return "";
+	}
 
 	// public Notes() {
 	// // TODO Auto-generated constructor stub

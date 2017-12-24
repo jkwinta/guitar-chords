@@ -25,9 +25,9 @@ public class ChordNames {
 			"7-/min7", // 10
 			"7+/maj7" };// 11
 
-	private static HashMap<String, Integer> nameToDegree = makeNameToDegree();
+	private static HashMap<String, Integer> nameToInterval = makeNameToInterval();
 
-	private static HashMap<String, Integer> makeNameToDegree() {
+	private static HashMap<String, Integer> makeNameToInterval() {
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		for (int i = 0; i < degreeNames.length; i++) {
 			for (String name : degreeNames[i].split(INTERVAL_NAMES_SEP)) {
@@ -46,7 +46,7 @@ public class ChordNames {
 		for (int i = 0; i < ChordNames.degreeNames.length; i++) {
 			System.out.println(ChordNames.degreeNames[i]);
 		}
-		System.out.println(ChordNames.nameToDegree);
+		System.out.println(ChordNames.nameToInterval);
 		System.out.println(ChordNames.getIntervalName(7));
 	}
 

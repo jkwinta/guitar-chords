@@ -4,13 +4,15 @@ import java.util.HashMap;
 
 public class ChordNames {
 
+	private static String INTERVAL_NAMES_SEP = "/";
+
 	private static HashMap<String, int[]> chordList;
 
 	public ChordNames() {
 		// TODO Auto-generated constructor stub
 	}
 
-	String[] degreeNames = { "R/root", // 0
+	private static String[] degreeNames = { "R/root", // 0
 			"2-/min2", // 1
 			"2+/maj2", // 2
 			"3-/min3", // 3
@@ -22,6 +24,31 @@ public class ChordNames {
 			"6+/maj6", // 9
 			"7-/min7", // 10
 			"7+/maj7" };// 11
+
+	private static HashMap<String, Integer> nameToDegree = makeNameToDegree();
+
+	private static HashMap<String, Integer> makeNameToDegree() {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		for (int i = 0; i < degreeNames.length; i++) {
+			for (String name : degreeNames[i].split(INTERVAL_NAMES_SEP)) {
+				map.put(name, i);
+			}
+		}
+		return map;
+	}
+
+	public static String getIntervalName(int interval) {
+		String[] names = degreeNames[interval % 12].split(INTERVAL_NAMES_SEP);
+		return names[names.length - 1];
+	}
+
+	public static void main(String[] args) {
+		for (int i = 0; i < ChordNames.degreeNames.length; i++) {
+			System.out.println(ChordNames.degreeNames[i]);
+		}
+		System.out.println(ChordNames.nameToDegree);
+		System.out.println(ChordNames.getIntervalName(7));
+	}
 
 	// d = {'maj': ('R', '3+', '5P'),
 	// 'min': ('R', '3-', '5P'),

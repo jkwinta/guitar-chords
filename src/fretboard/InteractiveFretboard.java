@@ -89,4 +89,10 @@ public class InteractiveFretboard extends FrettingChooser {
 	public static void main(String[] args) {
 		new InteractiveFretboard();
 	}
+
+	@Override
+	public void updateFretting(int stringNumber, int newValue) {
+		// TODO Auto-generated method stub
+		
+	}
 }

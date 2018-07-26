@@ -8,11 +8,9 @@
 ./fretboard/FretboardLayout.java
 ./fretboard/FretButton.java
 ./fretboard/FretHandler.java
-./java_file.txt
 ./guitarchords/StringObserver.java
 ./guitarchords/Chord.java
 ./guitarchords/ChordNames.java
-./guitarchords/Notes.java
 ./guitarchords/FrettingChooser.java
 ./guitarchords/FrettingWatcher.java
 ./guitarchords/Tunings.java

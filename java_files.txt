@@ -13,4 +13,3 @@
 ./guitarchords/ChordNames.java
 ./guitarchords/FrettingChooser.java
 ./guitarchords/FrettingWatcher.java
-./guitarchords/Tunings.java

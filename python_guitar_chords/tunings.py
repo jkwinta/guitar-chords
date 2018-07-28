@@ -14,10 +14,13 @@ OPEN_A = tuple(i + j for i, j in zip(STANDARD, [0, 0, 2, 2, 2, 0]))
 OPEN_G = tuple(i - 2 for i in OPEN_A)
 
 G6 = tuple(i + j for i, j in zip(STANDARD, [-2, -2, 0, 0, 0, 0]))
+DADGAD = tuple(i + j for i, j in zip(STANDARD, [-2, 0, 0, 0, -2, -2]))
+DROP_D = tuple(i + j for i, j in zip(STANDARD, [-2, 0, 0, 0, 0, 0]))
+DOUBLE_DROP_D = tuple(i + j for i, j in zip(STANDARD, [-2, 0, 0, 0, 0, -2]))
 
+# C6: CEGA
+# EACGAE
 # C6: C-A-C-G-C-E
-# G6: D-G-D-G-B-E
-# DADGAD
 
 from python_guitar_chords import notes
 

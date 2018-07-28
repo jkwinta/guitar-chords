@@ -18,6 +18,8 @@ ICON_PATHS = {REGULAR: ('../../files/fret_icons/png/reg.png', '../../files/fret_
 ICON_IMAGES = {k: tuple(Gtk.Image.new_from_file(p) for p in v) for k, v in ICON_PATHS.items()}
 
 
+# TODO: Wrong, can't put image directly as images can only be used once 
+
 # PIXBUFS = {k: tuple(GdkPixbuf.Pixbuf.new_from_file(p) for p in v) for k, v in ICON_PATHS.items()}
 
 

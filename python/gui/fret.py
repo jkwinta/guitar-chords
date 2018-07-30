@@ -15,10 +15,6 @@ ICON_PATHS = {REGULAR: ('../../files/fret_icons/png/reg.png', '../../files/fret_
               RIGHT_DOT: ('../../files/fret_icons/png/right.png', '../../files/fret_icons/png/right_fretted.png'),
               NUT: ('../../files/fret_icons/png/bar.png', '../../files/fret_icons/png/bar_fretted.png'), }
 
-ICON_IMAGES = {k: tuple(Gtk.Image.new_from_file(p) for p in v) for k, v in ICON_PATHS.items()}
-
-
-# TODO: Wrong, can't put image directly as images can only be used once 
 
 # PIXBUFS = {k: tuple(GdkPixbuf.Pixbuf.new_from_file(p) for p in v) for k, v in ICON_PATHS.items()}
 
@@ -28,6 +24,12 @@ class Fret(Gtk.EventBox):
         self.fret_number = fret_number
         if decoration not in DECORATIONS:
             decoration = REGULAR
-        self.standard_image, self.fretted_image = ICON_IMAGES[decoration]
+        self.standard_image, self.fretted_image = (Gtk.Image.new_from_file(p) for p in ICON_PATHS[decoration])
         # self.standard_image, self.fretted_image = (Gtk.Image.new_from_pixbuf(pb) for pb in PIXBUFS[decoration])
+        self.add(self.standard_image)
+
+    def set(self):
+        self.add(self.fretted_image)
+
+    def unset(self):
         self.add(self.standard_image)

@@ -23,7 +23,8 @@ DOUBLE_DROP_D = tuple(i + j for i, j in zip(STANDARD, [-2, 0, 0, 0, 0, -2]))
 # EGCGAE
 # C6: C-A-C-G-C-E
 
-from python import notes
+if __name__ == '__main__':
+    from python import notes
 
-for i in G6:
-    print(notes.Key().full_note_name(i))
+    for i in G6:
+        print(notes.Key().full_note_name(i))

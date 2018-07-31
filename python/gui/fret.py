@@ -27,10 +27,15 @@ class Fret(Gtk.EventBox):
             decoration = REGULAR
         self.standard_image, self.fretted_image = (Gtk.Image.new_from_file(p) for p in ICON_PATHS[decoration])
         # self.standard_image, self.fretted_image = (Gtk.Image.new_from_pixbuf(pb) for pb in PIXBUFS[decoration])
-        self.add(self.standard_image)
+        # self.add(self.standard_image)
+        self.unset()
 
     def set(self):
+        if self.get_child():
+            self.remove(self.get_child())
         self.add(self.fretted_image)
 
     def unset(self):
+        if self.get_child():
+            self.remove(self.get_child())
         self.add(self.standard_image)

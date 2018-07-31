@@ -23,7 +23,7 @@ DOUBLE_DROP_D = tuple(i + j for i, j in zip(STANDARD, [-2, 0, 0, 0, 0, -2]))
 # EGCGAE
 # C6: C-A-C-G-C-E
 
-from python_guitar_chords import notes
+from python import notes
 
 for i in G6:
     print(notes.Key().full_note_name(i))

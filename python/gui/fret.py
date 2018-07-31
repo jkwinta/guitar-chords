@@ -21,6 +21,7 @@ ICON_PATHS = {REGULAR: ('../../files/fret_icons/png/reg.png', '../../files/fret_
 
 class Fret(Gtk.EventBox):
     def __init__(self, fret_number, decoration=None):
+        Gtk.EventBox.__init__(self)
         self.fret_number = fret_number
         if decoration not in DECORATIONS:
             decoration = REGULAR

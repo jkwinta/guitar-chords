@@ -34,8 +34,10 @@ class Fret(Gtk.EventBox):
         if self.get_child():
             self.remove(self.get_child())
         self.add(self.fretted_image)
+        self.get_child().show()
 
     def unset(self):
         if self.get_child():
             self.remove(self.get_child())
         self.add(self.standard_image)
+        self.get_child().show()

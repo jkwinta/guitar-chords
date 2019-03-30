@@ -10,10 +10,14 @@ NUT = 'nut'
 
 DECORATIONS = (REGULAR, LEFT_DOT, RIGHT_DOT, NUT,)
 
-ICON_PATHS = {REGULAR: ('../../files/fret_icons/png/reg.png', '../../files/fret_icons/png/reg_fretted.png'),
-              LEFT_DOT: ('../../files/fret_icons/png/left.png', '../../files/fret_icons/png/left_fretted.png'),
-              RIGHT_DOT: ('../../files/fret_icons/png/right.png', '../../files/fret_icons/png/right_fretted.png'),
-              NUT: ('../../files/fret_icons/png/bar.png', '../../files/fret_icons/png/bar_fretted.png'), }
+# ICON_PATHS = {REGULAR: ('../../files/fret_icons/png/reg.png', '../../files/fret_icons/png/reg_fretted.png'),
+#               LEFT_DOT: ('../../files/fret_icons/png/left.png', '../../files/fret_icons/png/left_fretted.png'),
+#               RIGHT_DOT: ('../../files/fret_icons/png/right.png', '../../files/fret_icons/png/right_fretted.png'),
+#               NUT: ('../../files/fret_icons/png/bar.png', '../../files/fret_icons/png/bar_fretted.png'), }
+ICON_PATHS = {REGULAR: ('../../files/fret_icons/png/reg_125.png', '../../files/fret_icons/png/reg_fretted_125.png'),
+              LEFT_DOT: ('../../files/fret_icons/png/left_125.png', '../../files/fret_icons/png/left_fretted_125.png'),
+              RIGHT_DOT: ('../../files/fret_icons/png/right_125.png', '../../files/fret_icons/png/right_fretted_125.png'),
+              NUT: ('../../files/fret_icons/png/bar_125.png', '../../files/fret_icons/png/bar_fretted_125.png'), }
 
 
 # PIXBUFS = {k: tuple(GdkPixbuf.Pixbuf.new_from_file(p) for p in v) for k, v in ICON_PATHS.items()}

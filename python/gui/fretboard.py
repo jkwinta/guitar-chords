@@ -7,12 +7,14 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk, GdkPixbuf
 
 DEFAULT_STRINGS = 6
-DEFAULT_FRETS = 21
+DEFAULT_FRETS = 18
+# DEFAULT_FRETS = 21
 
 
 class Fretboard(Gtk.Window):
     def __init__(self, fretboard_decoration):
         Gtk.Window.__init__(self)
+        self.fretboard_decoration = fretboard_decoration
         self.grid = Gtk.Grid()
         self.add(self.grid)
         self.frets = [[] for _ in range(DEFAULT_STRINGS)]

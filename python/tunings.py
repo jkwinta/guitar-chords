@@ -1,30 +1,28 @@
-STANDARD = [0] * 6
-STANDARD[1] = -3
-STANDARD[0] = STANDARD[1] - 5
-STANDARD[2] = STANDARD[1] + 5
-STANDARD[3] = STANDARD[2] + 5
-STANDARD[4] = STANDARD[3] + 4
-STANDARD[5] = STANDARD[4] + 5
-STANDARD = tuple(STANDARD)
+tunings = {
+    'STANDARD': ('E2', 'A2', 'D3', 'G3', 'B3', 'E4'),
+    'OPEN E': ('E2', 'B2', 'E3', 'G#3', 'B3', 'E4'),
+    'OPEN D': ('D2', 'A2', 'D3', 'F#3', 'A3', 'D4'),
+    'OPEN A': ('E2', 'A2', 'E3', 'A3', 'C#4', 'E4'),
+    'OPEN G': ('D2', 'G2', 'D3', 'G3', 'B3', 'D4'),
+    'OPEN G LOW E': ('E2', 'G2', 'D3', 'G3', 'B3', 'D4'),
+    'G6': ('D2', 'G2', 'D3', 'G3', 'B3', 'E4'),
+    'DADGAD': ('D2', 'A2', 'D3', 'G3', 'A3', 'D4'),
+    'DROP D': ('D2', 'A2', 'D3', 'G3', 'B3', 'E4'),
+    'DOUBLE DROP D': ('D2', 'A2', 'D3', 'G3', 'B3', 'D4'),
 
-OPEN_E = tuple(i + j for i, j in zip(STANDARD, [0, 2, 2, 1, 0, 0]))
-OPEN_D = tuple(i - 2 for i in OPEN_E)
+}
 
-OPEN_A = tuple(i + j for i, j in zip(STANDARD, [0, 0, 2, 2, 2, 0]))
-OPEN_G = tuple(i - 2 for i in OPEN_A)
+# Check:
+tuning_frettings = {
+    'STANDARD': (0, 0, 0, 0, 0, 0),
+    'OPEN E': (0, 2, 2, 1, 0, 0),
+    'OPEN D': (-2, 0, 0, -1, -2, -2),
+    'OPEN A': (0, 0, 2, 2, 2, 0),
+    'OPEN G': (-2, -2, 0, 0, 0, -2),
+    'OPEN G LOW E': (0, -2, 0, 0, 0, -2),
+    'G6': (-2, -2, 0, 0, 0, 0),
+    'DADGAD': (-2, 0, 0, 0, -2, -2),
+    'DROP D': (-2, 0, 0, 0, 0, 0),
+    'DOUBLE DROP D': (-2, 0, 0, 0, 0, -2),
 
-G6 = tuple(i + j for i, j in zip(STANDARD, [-2, -2, 0, 0, 0, 0]))
-DADGAD = tuple(i + j for i, j in zip(STANDARD, [-2, 0, 0, 0, -2, -2]))
-DROP_D = tuple(i + j for i, j in zip(STANDARD, [-2, 0, 0, 0, 0, 0]))
-DOUBLE_DROP_D = tuple(i + j for i, j in zip(STANDARD, [-2, 0, 0, 0, 0, -2]))
-
-# C6: CEGA
-# EACGAE
-# EGCGAE
-# C6: C-A-C-G-C-E
-
-if __name__ == '__main__':
-    from python import notes
-
-    for i in G6:
-        print(notes.Key().full_note_name(i))
+}

@@ -35,7 +35,8 @@ chords = {
     'JAZZ SUS': {'ROOT', 'PERFECT 4TH', 'PERFECT 5TH', 'MINOR 7TH',
                  'MAJOR 9TH'},
 
-    'MAJOR 7♯11': {'ROOT', 'MAJOR 3RD', 'PERFECT 5TH', 'MAJOR 7TH', 'SHARP 11TH'},
+    'MAJOR 7♯11': {'ROOT', 'MAJOR 3RD', 'PERFECT 5TH', 'MAJOR 7TH',
+                   'SHARP 11TH'},
 
     'MAJOR 6TH': {'ROOT', 'MAJOR 3RD', 'PERFECT 5TH', 'MAJOR 6TH'},
     'MINOR MAJOR 6TH': {'ROOT', 'MINOR 3RD', 'PERFECT 5TH', 'MAJOR 6TH'},

@@ -7,6 +7,5 @@ HEIGHT=40
 
 for file in *.svg
 do
-    # echo $file  png/${file/%.svg/.png}
-    inkscape -z $PWD/$file -e  $PWD/png/${file/%.svg/.png} -w $WIDTH -h $HEIGHT
+    inkscape -z $PWD/$file -e  $PWD/png/${file/%.svg/.png} -w $WIDTH -h $HEIGHT -b "#ffffff"
 done

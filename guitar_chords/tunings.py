@@ -12,7 +12,7 @@ tunings = {
 
 }
 
-# Check:
+# TODO: Check:
 tuning_frettings = {
     'STANDARD': (0, 0, 0, 0, 0, 0),
     'OPEN E': (0, 2, 2, 1, 0, 0),

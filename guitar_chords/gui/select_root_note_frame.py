@@ -23,6 +23,7 @@ class SelectRootNoteFrame(tk.Frame):
                 i += 1
         self.root_notes_label.pack()
         self.root_note_button_frame.pack()
+        self.root_note_button_frame.config(borderwidth=1, relief=tk.GROOVE)
 
     def get_selected_note(self):
         return self.root_note_var.get()

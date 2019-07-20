@@ -68,6 +68,29 @@ def note_name_to_index(note_name):
         return relative_value + 12 * (octave_value - 3)
 
 
+names_to_semitones = {
+    'ROOT': 0,
+    'MINOR 2ND': 1,
+    'MAJOR 2ND': 2,
+    'AUGMENTED 2ND': 3,
+    'MINOR 3RD': 3,
+    'MAJOR 3RD': 4,
+    'PERFECT 4TH': 5,
+    'AUGMENTED 4TH': 6,
+    'DIMINISHED 5TH': 6,
+    'PERFECT 5TH': 7,
+    'AUGMENTED 5TH': 8,
+    'MINOR 6TH': 8,
+    'MAJOR 6TH': 9,
+    'DIMINISHED 7TH': 9,
+    'MINOR 7TH': 10,
+    'MAJOR 7TH': 11,
+    'MAJOR 9TH': 14,
+    'PERFECT 11TH': 17,
+    'SHARP 11TH': 18,
+    'MAJOR 13th': 21,
+}
+
 if __name__ == '__main__':
     for i in range(-10, 100):
         if i != note_name_to_index(note_index_to_name(i)):

@@ -1,9 +1,11 @@
 #!/bin/bash
 
 # WIDTH=24
-WIDTH=32
 # HEIGHT=36
-HEIGHT=40
+#WIDTH=32
+#HEIGHT=40
+WIDTH=28
+HEIGHT=35
 
 for file in *.svg
 do

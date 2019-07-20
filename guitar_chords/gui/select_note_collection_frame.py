@@ -3,7 +3,7 @@ import tkinter as tk
 from .. import chords, scales
 
 
-class NoteCollectionSelectFrame(tk.Frame):
+class SelectNoteCollectionFrame(tk.Frame):
     def __init__(self, master):
         super().__init__(master)
         self.chord_or_scale_frame = tk.Frame(self)

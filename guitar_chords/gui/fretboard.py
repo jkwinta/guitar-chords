@@ -1,5 +1,6 @@
 import tkinter as tk
 from .fret import Fret
+from .fret_decoration import FretDecorator
 
 
 class Fretboard(tk.Toplevel):
@@ -10,10 +11,9 @@ class Fretboard(tk.Toplevel):
         self.note_collection = note_collection
 
         self.fretboard_frame = FretboardFrame(self)
-        for i in range(22):
-            for j in range(6):
-                fret = Fret(self.fretboard_frame, '')
-                fret.grid(row=i, column=j)
+        for fret_number, string_number, deco in FretDecorator(6, 19):
+            fret = Fret(self.fretboard_frame, deco)
+            fret.grid(row=fret_number, column=string_number)
         self.fretboard_frame.pack()
 
     def update_fretboard(self, tuning, root, note_collection):

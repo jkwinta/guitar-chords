@@ -25,9 +25,9 @@ class FretDecorator:
             return 1
         return 0
 
-    def __init__(self, number_of_strings, number_of_frets):
-        self.number_of_strings = number_of_strings
+    def __init__(self, number_of_frets, number_of_strings):
         self.number_of_frets = number_of_frets
+        self.number_of_strings = number_of_strings
 
     def __iter__(self):
         for string_number in range(self.number_of_strings):

@@ -36,3 +36,9 @@ class Fret(tk.Label):
         else:
             self.decoration = 'reg'
         self.config(image=get_photo_image(self.decoration, 0), borderwidth=0)
+
+    def set_fretted(self):
+        self.config(image=get_photo_image(self.decoration, 1))
+
+    def set_unfretted(self):
+        self.config(image=get_photo_image(self.decoration, 0))

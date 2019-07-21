@@ -25,11 +25,19 @@ class MainWindow(tk.Frame):
               self.note_collection_select.get_selected_note_collection_name(),
               self.note_collection_select.get_selected_note_collection(),
               flush=True)
-
-        if self.fretboard is None or not self.fretboard.winfo_exists():
-            self.fretboard = Fretboard(self, None, None, None)
+        tuning = 'STANDARD'  # TODO
+        root = self.root_select.get_selected_note()
+        note_collection = (
+            self.note_collection_select.get_chord_or_scale(),
+            self.note_collection_select.get_selected_note_collection_name()
+        )
+        if tuning is None or root is None or None in note_collection:
+            pass
         else:
-            self.fretboard.update_fretboard(None, None, None)
+            if self.fretboard is None or not self.fretboard.winfo_exists():
+                self.fretboard = Fretboard(self, tuning, root, note_collection)
+            else:
+                self.fretboard.update_fretboard(tuning, root, note_collection)
 
 
 if __name__ == '__main__':

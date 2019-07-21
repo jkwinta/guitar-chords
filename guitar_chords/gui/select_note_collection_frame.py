@@ -21,10 +21,13 @@ class SelectNoteCollectionFrame(tk.Frame):
         self.note_collection_list_box = tk.Listbox(self)
         self.note_collection_list_box.pack()
 
+    def get_chord_or_scale(self):
+        return self.chord_or_scale.get()
+
     def _on_button_click(self):
-        if self.chord_or_scale.get() == 'scale':
+        if self.get_chord_or_scale() == 'scale':
             self.note_collections = scales
-        elif self.chord_or_scale.get() == 'chord':
+        elif self.get_chord_or_scale() == 'chord':
             self.note_collections = chords
         else:
             self.note_collections = None

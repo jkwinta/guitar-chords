@@ -18,6 +18,10 @@ NOTES = [['C'],
          ['B'],
          ]
 
+NOTE_VALUES = {note: i
+               for i, notes in enumerate(NOTES)
+               for note in notes}
+
 NATURALS = [note_list[0] if len(note_list) == 1 else None
             for note_list in NOTES]
 

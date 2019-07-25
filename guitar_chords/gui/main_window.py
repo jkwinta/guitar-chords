@@ -35,7 +35,7 @@ class MainWindow(tk.Frame):
             pass
         else:
             if self.fretboard is None or not self.fretboard.winfo_exists():
-                self.fretboard = Fretboard(self, tuning, root, note_collection)
+                self.fretboard = Fretboard(self, tuning, root, note_collection, 'H')
             else:
                 self.fretboard.update_fretboard(tuning, root, note_collection)
 

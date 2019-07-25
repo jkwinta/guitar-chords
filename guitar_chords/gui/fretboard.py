@@ -10,8 +10,9 @@ from ..notes import names_to_semitones, note_name_to_index
 
 class Fretboard(tk.Toplevel):
     def __init__(self, master, tuning, root, note_collection,
-                 number_of_frets=21, number_of_strings=6):
+                 orientation='V', number_of_frets=21, number_of_strings=6):
         super().__init__(master)
+        self.orientation = orientation
         self.number_of_frets = number_of_frets
         self.number_of_strings = number_of_strings
         self.tuning_name = None
@@ -29,8 +30,13 @@ class Fretboard(tk.Toplevel):
         self.fretboard_frame = FretboardFrame(self)
         for fret_number, string_number, deco in FretDecorator(
                 self.number_of_frets, self.number_of_strings):
-            fret = Fret(self.fretboard_frame, deco)
-            fret.grid(row=fret_number, column=string_number)
+            fret = Fret(self.fretboard_frame, deco, self.orientation)
+            if self.orientation == 'V':
+                fret.grid(row=fret_number, column=string_number)
+            elif self.orientation == 'H':
+                fret.grid(row=(self.number_of_strings - string_number - 1),
+                          column=fret_number)
+
             self.frets[fret_number, string_number] = fret
         self.fretboard_frame.pack()
         self.update_fretboard(tuning, root, note_collection)

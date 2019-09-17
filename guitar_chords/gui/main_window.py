@@ -4,6 +4,7 @@ from guitar_chords.notes import NOTES
 from .select_root_note_frame import SelectRootNoteFrame
 from .select_note_collection_frame import SelectNoteCollectionFrame
 from .fretboard import Fretboard
+from guitar_chords.gui.select_tuning_frame import SelectTuningFrame
 
 
 class MainWindow(tk.Frame):
@@ -14,6 +15,8 @@ class MainWindow(tk.Frame):
         self.root_select.pack()
         self.note_collection_select = SelectNoteCollectionFrame(self)
         self.note_collection_select.pack(fill=tk.X)
+        self.tuning_select = SelectTuningFrame(self)
+        self.tuning_select.pack(fill=tk.X)
         self.go_button = tk.Button(self, text='Go!',
                                    command=self.go_button_callback)
         self.go_button.pack()

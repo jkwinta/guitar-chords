@@ -1,6 +1,7 @@
 import tkinter as tk
 
-from .. import chords, scales
+from guitar_chords.chords import chords
+from guitar_chords.scales import scales
 
 
 class SelectNoteCollectionFrame(tk.Frame):
@@ -16,10 +17,14 @@ class SelectNoteCollectionFrame(tk.Frame):
             b.config(indicatoron=0)
             b.pack(side=tk.LEFT)
         self.chord_or_scale_frame.pack()
+        self.chord_or_scale_frame.config(borderwidth=1)
         self.note_collection_names = None
         self.note_collections = None
         self.note_collection_list_box = tk.Listbox(self)
         self.note_collection_list_box.pack()
+        self.note_collection_list_box.config(borderwidth=1)
+        self.config(borderwidth=2, relief=tk.GROOVE)
+        self.pack()
 
     def get_chord_or_scale(self):
         return self.chord_or_scale.get()

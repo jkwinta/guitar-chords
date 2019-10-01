@@ -2,10 +2,10 @@ import tkinter as tk
 from .fret import Fret
 from .fret_decoration import FretDecorator
 
-from ..tunings import tunings
-from ..chords import chords
-from ..scales import scales
-from ..notes import names_to_semitones, note_name_to_index
+from guitar_chords.tunings import tunings
+from guitar_chords.chords import chords
+from guitar_chords.scales import scales
+from guitar_chords.notes import names_to_semitones, note_name_to_index
 
 
 class Fretboard(tk.Toplevel):

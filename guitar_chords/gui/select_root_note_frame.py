@@ -1,6 +1,6 @@
 import tkinter as tk
 
-from .. import NOTES
+from guitar_chords.notes import NOTES
 
 N_COLUMNS = 3
 
@@ -24,12 +24,7 @@ class SelectRootNoteFrame(tk.Frame):
         self.root_notes_label.pack()
         self.root_note_button_frame.pack()
         self.root_note_button_frame.config(borderwidth=1, relief=tk.GROOVE)
+        self.config(borderwidth=1, relief=tk.GROOVE)
 
     def get_selected_note(self):
         return self.root_note_var.get()
-        # selection_tuple = self.root_notes_list_box.curselection()
-        # if selection_tuple:
-        #     result = self.note_names[selection_tuple[0]]
-        # else:
-        #     result = None
-        # return result

@@ -1,5 +1,5 @@
 import tkinter as tk
-from .gui import MainWindow
+from guitar_chords.gui import MainWindow
 
 root = tk.Tk()
 app = MainWindow(root)

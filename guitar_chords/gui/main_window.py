@@ -1,10 +1,12 @@
 import tkinter as tk
 
 from guitar_chords.notes import NOTES
-from .select_root_note_frame import SelectRootNoteFrame
-from .select_note_collection_frame import SelectNoteCollectionFrame
-from .fretboard import Fretboard
+from guitar_chords.gui.select_root_note_frame import SelectRootNoteFrame
+from guitar_chords.gui.select_note_collection_frame import SelectNoteCollectionFrame
+from guitar_chords.gui.fretboard import Fretboard
 from guitar_chords.gui.select_tuning_frame import SelectTuningFrame
+from guitar_chords.gui.fretboard_orientation_select_frame import \
+    FretboardOrientationSelectFrame
 
 
 class MainWindow(tk.Frame):
@@ -17,10 +19,13 @@ class MainWindow(tk.Frame):
         self.note_collection_select.pack(fill=tk.X)
         self.tuning_select = SelectTuningFrame(self)
         self.tuning_select.pack(fill=tk.X)
+        self.orientation_select = FretboardOrientationSelectFrame(self)
+        self.orientation_select.pack(fill=tk.X)
         self.go_button = tk.Button(self, text='Go!',
                                    command=self.go_button_callback)
         self.go_button.pack()
         self.pack()
+        # self.config(background='gray80')
         self.fretboard = None
 
     def go_button_callback(self):
@@ -28,7 +33,7 @@ class MainWindow(tk.Frame):
               self.note_collection_select.get_selected_note_collection_name(),
               self.note_collection_select.get_selected_note_collection(),
               flush=True)
-        tuning = 'STANDARD'  # TODO
+        tuning = self.tuning_select.get_selected_tuning()
         root = self.root_select.get_selected_note()
         note_collection = (
             self.note_collection_select.get_chord_or_scale(),
@@ -46,5 +51,5 @@ class MainWindow(tk.Frame):
 if __name__ == '__main__':
     root = tk.Tk()
     app = MainWindow(root)
-    root.wm_title('MaiWindow title str')
+    root.wm_title('MainWindow title str')
     root.mainloop()

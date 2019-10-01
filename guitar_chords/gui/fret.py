@@ -2,7 +2,7 @@ import tkinter as tk
 from PIL import Image, ImageTk
 from os import path
 
-IMAGE_DIR = './files/fret_icons/png'
+IMAGE_DIR = '../files/fret_icons/png'
 
 IMAGE_PATHS_BY_DECORATOR = {
     'bar': ['bar', 'bar_fretted'],
@@ -14,18 +14,34 @@ IMAGE_PATHS_BY_DECORATOR = {
     'reg': ['reg', 'reg_fretted_smbc'],
 }
 
+IMAGE_PATHS = {
+    ('bar', True): 'bar_fretted',
+    ('bar', False): 'bar',
+    ('left', True): 'left_fretted_smbc',
+    ('left', False): 'left',
+    ('right', True): 'right_fretted_smbc',
+    ('right', False): 'right',
+    ('reg', True): 'reg_fretted_smbc',
+    ('reg', False): 'reg',
+}
+
 PHOTO_IMAGES_BY_DECORATOR = {
     deco: [None for _ in ims] for deco, ims in IMAGE_PATHS_BY_DECORATOR.items()
 }
 
+PHOTO_IMAGES = {}
 
-def get_photo_image(decoration, status, rotation):
-    if PHOTO_IMAGES_BY_DECORATOR[decoration][bool(status)] is None:
-        image_name = IMAGE_PATHS_BY_DECORATOR[decoration][bool(status)]
+
+# TODO: THis function converts V/H to 0/90???
+def get_photo_image(decoration, is_fretted, rotation):
+    key = decoration, is_fretted, rotation
+    if key not in PHOTO_IMAGES:
+        image_name = IMAGE_PATHS[key[:2]]
         image_path = path.join(IMAGE_DIR, image_name + '.png')
-        result = ImageTk.PhotoImage(Image.open(image_path).rotate(rotation, expand=True))
-        PHOTO_IMAGES_BY_DECORATOR[decoration][bool(status)] = result
-    return PHOTO_IMAGES_BY_DECORATOR[decoration][bool(status)]
+        image = Image.open(image_path).rotate(rotation, expand=True)
+        photo_image = ImageTk.PhotoImage(image)
+        PHOTO_IMAGES[key] = photo_image
+    return PHOTO_IMAGES[key]
 
 
 # ImageTk.PhotoImage(Image.open(path.join(IMAGE_DIR, im + '.png')))
@@ -38,6 +54,7 @@ class Fret(tk.Label):
             self.decoration = decoration
         else:
             self.decoration = 'reg'
+        self.orientation = orientation
         if orientation == 'V':
             self.rotation = 0
         elif orientation == 'H':

@@ -1,9 +1,7 @@
 import tkinter as tk
 
-from guitar_chords import tunings
+from guitar_chords.tunings import tunings
 
-
-# TODO
 
 class SelectTuningFrame(tk.Frame):
     def __init__(self, master):
@@ -24,17 +22,15 @@ class SelectTuningFrame(tk.Frame):
                 label=tuning_name,
                 command=lambda s=tuning_name: self.text_display_variable.set(s))
 
-        # self.tuning_menu_button.menu.add_checkbutton(
-        #     label='asdf',
-        #     command=lambda: self.text_display_variable.set('asdf'))
-        # self.tuning_menu_button.menu.add_checkbutton(
-        #     label='qwer',
-        #     command=lambda: self.text_display_variable.set('qwer'))
+        self.text_display_variable.set('STANDARD')
 
         self.tuning_menu_button.pack(fill=tk.X)
         # self.tuning_menu_button.config(width=20)
 
         self.pack(fill=tk.X)
         self.config(borderwidth=2, relief=tk.GROOVE)
+
+    def get_selected_tuning(self):
+        return self.text_display_variable.get()
 
 # https://www.tutorialspoint.com/python/tk_menubutton.htm

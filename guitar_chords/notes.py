@@ -104,7 +104,7 @@ def degree_note_name(root_name, degree_name):
         raise ValueError('Root name needs to start with a character A-G.')
     degree_of_letter = int(''.join(ch for ch in degree_name if ch.isdigit()))
     result_letter = 'CDEFGAB'[('CDEFGAB'.index(root_natural)
-                               + degree_of_letter) % 7]
+                               + degree_of_letter - 1) % 7]
     result_natural_value = note_name_to_index(result_letter)
     desired_result_value = (note_name_to_index(root_name)
                             + names_to_semitones[degree_name]) % 12

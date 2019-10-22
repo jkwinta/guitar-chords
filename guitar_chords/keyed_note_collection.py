@@ -52,4 +52,5 @@ class KeyedNoteCollection:
 
 if __name__ == '__main__':
     a = KeyedNoteCollection('C', 'chord', 'MAJOR')
+    b = KeyedNoteCollection('D', 'scale', 'MINOR PENTATONIC')
     print(a)

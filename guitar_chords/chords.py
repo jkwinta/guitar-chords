@@ -1,4 +1,5 @@
 chords = {
+    '5': ['ROOT', 'PERFECT 5TH'],
     'MAJOR': ['ROOT', 'MAJOR 3RD', 'PERFECT 5TH'],
     'MINOR': ['ROOT', 'MINOR 3RD', 'PERFECT 5TH'],
     'AUGMENTED': ['ROOT', 'MAJOR 3RD', 'AUGMENTED 5TH'],

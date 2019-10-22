@@ -41,7 +41,7 @@ def note_index_to_name(note_index):
 def note_name_to_index(note_name):
     note_name = note_name.strip()
     note_natural = note_name[0]
-    if note_natural not in 'ABCDEFG':
+    if note_natural not in 'CDEFGAB':
         raise ValueError('Note name needs to start with a character A-G.')
     if len(note_name) == 1:
         return NATURALS.index(note_natural)
@@ -94,6 +94,30 @@ names_to_semitones = {
     'SHARP 11TH': 18,
     'MAJOR 13th': 21,
 }
+
+
+def degree_note_name(root_name, degree_name):
+    if degree_name == 'ROOT':
+        return root_name
+    root_natural = root_name[0]
+    if root_natural not in 'CDEFGAB':
+        raise ValueError('Root name needs to start with a character A-G.')
+    degree_of_letter = int(''.join(ch for ch in degree_name if ch.isdigit()))
+    result_letter = 'CDEFGAB'[('CDEFGAB'.index(root_natural)
+                               + degree_of_letter) % 7]
+    result_natural_value = note_name_to_index(result_letter)
+    desired_result_value = (note_name_to_index(root_name)
+                            + names_to_semitones[degree_name]) % 12
+    if result_natural_value == desired_result_value:
+        return result_letter
+    if ((desired_result_value - result_natural_value) % 12) < (
+            (result_natural_value - desired_result_value) % 12):
+        n_sharps = (desired_result_value - result_natural_value) % 12
+        return result_letter + '#' * n_sharps
+    else:
+        n_flats = (result_natural_value - desired_result_value) % 12
+        return result_letter + 'b' * n_flats
+
 
 if __name__ == '__main__':
     for i in range(-10, 100):

@@ -1,56 +1,101 @@
 from guitar_chords.chords import chords
 from guitar_chords.scales import scales
-from guitar_chords.notes import note_name_to_index, degree_note_name
+from guitar_chords.notes import note_name_to_index, degree_note_name, IntervalNote
 from guitar_chords.relative_note_collection import RelativeNoteCollection
 
 
 class KeyedNoteCollection:
 
-    def __init__(self, root_name, scale_or_chord, collection_name):
+    def __init__(self, root_name, list_of_interval_names):
         self.root_name = root_name
-        self.root_value = note_name_to_index(self.root_name)
-        self.scale_or_chord = scale_or_chord
-        self.collection_name = collection_name
-        self.relative_note_collection = RelativeNoteCollection(scale_or_chord,
-                                                               collection_name)
+        self.intervals = list_of_interval_names
+        self.notes = [IntervalNote(root_name, interval_name) for
+                      interval_name in list_of_interval_names]
+
         self.chords_contained = None
-        self.scales_containing = None
-
-    def __str__(self):
-        return ' '.join(w.capitalize() for w in (
-                [self.root_name]
-                + self.collection_name.split(' ')
-                + [self.scale_or_chord])
-                        )
-
-    def __repr__(self):
-        return self.__class__.__name__ + str(
-            (self.root_name, self.scale_or_chord, self.collection_name))
+        self.chords_contained_by = None
+        self.scales_contained = None
+        self.scales_contained_by = None
 
     def get_note_values(self):
-        return [(note_val + self.root_value) % 12
-                for note_val in self.relative_note_collection.get_note_values()]
+        return [note.value for note in self.notes]
+
+    def contains_collection(self, other):
+        return set(other.get_note_values()) <= set(self.get_note_values())
+
+    def is_contained_by_collection(self, other):
+        return set(self.get_note_values()) <= set(other.get_note_values())
 
     def get_chords_contained(self):
         if self.chords_contained is None:
             self.chords_contained = []
-            for degree_name in self.relative_note_collection.get_note_names():
-                degree_root_note = degree_note_name(self.root_name, degree_name)
-                for chord_name in chords:
-                    chord = KeyedNoteCollection(degree_root_note, 'chord',
-                                                chord_name)
-                    if set(chord.get_note_values()) <= set(
-                            self.get_note_values()):
+            for note in self.notes:
+                for chord_name in chords.keys():
+                    chord = Chord(note.name, chord_name)
+                    if self.contains_collection(chord):
                         self.chords_contained.append(chord)
         return self.chords_contained
 
-    def get_scales_containing(self):
-        if self.scales_containing is None:
-            pass
-        return self.scales_containing
+    def get_chords_contained_by(self):
+        if self.chords_contained_by is None:
+            self.chords_contained_by = []
+            for note in self.notes:
+                for chord_name in chords.keys():
+                    chord = Chord(note.name, chord_name)
+                    if self.is_contained_by_collection(chord):
+                        self.chords_contained_by.append(chord)
+        return self.chords_contained_by
+
+    def get_scales_contained(self):
+        if self.scales_contained is None:
+            self.scales_contained = []
+            for note in self.notes:
+                for scale_name in scales.keys():
+                    scale = Scale(note.name, scale_name)
+                    if self.contains_collection(scale):
+                        self.scales_contained.append(scale)
+        return self.scales_contained
+
+    def get_scales_contained_by(self):
+        if self.scales_contained_by is None:
+            self.scales_contained_by = []
+            for note in self.notes:
+                for scale_name in scales.keys():
+                    scale = Scale(note.name, scale_name)
+                    if self.is_contained_by_collection(scale):
+                        self.scales_contained_by.append(scale)
+        return self.scales_contained_by
+
+
+class Chord(KeyedNoteCollection):
+    def __init__(self, root_name, chord_name):
+        super().__init__(root_name, chords.get(chord_name, []).copy())
+        self.chord_name = chord_name
+
+    def __str__(self):
+        return ' '.join(
+            word.capitalize() for word in
+            [self.root_name] + self.chord_name.split(' ') + ['Chord'])
+
+    def __repr__(self):
+        return 'Chord({}, {})'.format(self.root_name, self.chord_name)
+
+
+class Scale(KeyedNoteCollection):
+    def __init__(self, root_name, scale_name):
+        super().__init__(root_name, scales.get(scale_name, []).copy())
+        self.scale_name = scale_name
+
+    def __str__(self):
+        return ' '.join(
+            word.capitalize() for word in
+            [self.root_name] + self.scale_name.split(' ') + ['Scale'])
+
+    def __repr__(self):
+        return 'Scale({}, {})'.format(self.root_name, self.scale_name)
 
 
 if __name__ == '__main__':
-    a = KeyedNoteCollection('C', 'chord', 'MAJOR')
-    b = KeyedNoteCollection('D', 'scale', 'MINOR PENTATONIC')
+    a = Chord('C', 'MAJOR')
+    b = Scale('D', 'MINOR PENTATONIC')
     print(a)

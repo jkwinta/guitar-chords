@@ -119,6 +119,22 @@ def degree_note_name(root_name, degree_name):
         return result_letter + 'b' * n_flats
 
 
+class IntervalNote:
+    def __init__(self, root_name, degree_name):
+        self.root = root_name
+        self.degree = degree_name
+        self.value = (note_name_to_index(root_name)
+                      + names_to_semitones[degree_name]) % 12
+        self.name = degree_note_name(root_name, degree_name)
+
+    def __str__(self):
+        return self.name
+
+    def __repr__(self):
+        return '{} IntervalNote({}, {})'.format(
+            self.name, self.root, self.degree)
+
+
 if __name__ == '__main__':
     for i in range(-10, 100):
         if i != note_name_to_index(note_index_to_name(i)):

@@ -1,16 +1,21 @@
 from guitar_chords.chords import chords
 from guitar_chords.scales import scales
-from guitar_chords.notes import note_name_to_index, degree_note_name, IntervalNote
-from guitar_chords.relative_note_collection import RelativeNoteCollection
+from guitar_chords.notes import IntervalNote
 
 
 class KeyedNoteCollection:
 
     def __init__(self, root_name, list_of_interval_names):
         self.root_name = root_name
+        self.root_note = None
         self.intervals = list_of_interval_names
-        self.notes = [IntervalNote(root_name, interval_name) for
-                      interval_name in list_of_interval_names]
+        self.notes = []
+        for interval_name in list_of_interval_names:
+            self.notes.append(IntervalNote(root_name, interval_name))
+            if interval_name == 'ROOT':
+                self.root_note = self.notes[-1]
+        if self.root_note is None:
+            self.root_note = IntervalNote(root_name, 'ROOT')
 
         self.chords_contained = None
         self.chords_contained_by = None

@@ -24,7 +24,7 @@
   </ns0:metadata>
   <ns0:g id="layer1" transform="translate(0,-257)" ns1:groupmode="layer" ns1:label="Layer 1">
     <ns0:rect height="8" id="rect7" style="stroke-width:0.29840153" width="32" x="0" y="289" />
-    <ns0:circle cx="16" cy="273" id="path9" r="10" style="fill:#0087bd;fill-opacity:1;stroke-width:0.61581236" />
+    <ns0:circle cx="16" cy="273" id="path9" r="10" style="fill:#0000ff;fill-opacity:1;stroke-width:0.61581236" />
     <ns0:circle cx="16" cy="273" id="path14" r="6" style="fill:#ffffff;fill-opacity:1;stroke-width:0.31146514;opacity:1" />
   </ns0:g>
 </ns0:svg>

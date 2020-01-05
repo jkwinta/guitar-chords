@@ -22,6 +22,9 @@ class KeyedNoteCollection:
         self.scales_contained = None
         self.scales_contained_by = None
 
+    def contains_note_value(self, note_value):
+        return (note_value % 12) in set(n.value for n in self.notes)
+
     def get_note_values(self):
         return [note.value for note in self.notes]
 

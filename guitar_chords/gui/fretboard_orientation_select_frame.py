@@ -8,18 +8,17 @@ class FretboardOrientationSelectFrame(tk.Frame):
         self.description_label.pack()
         self.selection_frame = tk.Frame(self)
         self.orientation = tk.StringVar()
-        self.orientation = tk.BooleanVar()
-        self.orientation.set(False)
-        # for text, value in [('Vertical', 'scale'), ('Chords', 'chord')]:
-        for value, text in enumerate(['Vertical', 'Horizontal']):
-            b = tk.Radiobutton(self.selection_frame, text=text,
-                               variable=self.orientation, value=bool(value))
+        self.orientation.set(None)
+        for orientation in ['Vertical', 'Horizontal']:
+            b = tk.Radiobutton(self.selection_frame, text=orientation,
+                               variable=self.orientation, value=orientation[0])
             b.config(indicatoron=0)
             b.pack(side=tk.LEFT)
+        self.orientation.set('V')
         self.selection_frame.pack()
         self.selection_frame.config(borderwidth=1)
         self.config(borderwidth=2, relief=tk.GROOVE)
         self.pack()
 
     def get_orientation(self):
-        return ['Vertical', 'Horizontal'][self.orientation.get()]
+        return self.orientation.get()

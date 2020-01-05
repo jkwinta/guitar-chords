@@ -7,6 +7,7 @@ from guitar_chords.gui.fretboard import Fretboard
 from guitar_chords.gui.select_tuning_frame import SelectTuningFrame
 from guitar_chords.gui.fretboard_orientation_select_frame import \
     FretboardOrientationSelectFrame
+from guitar_chords.note_collection import Chord, Scale
 
 
 class MainWindow(tk.Frame):
@@ -34,22 +35,34 @@ class MainWindow(tk.Frame):
               self.note_collection_select.get_selected_note_collection(),
               flush=True)
         tuning = self.tuning_select.get_selected_tuning()
-        root = self.root_select.get_selected_note()
-        note_collection = (
-            self.note_collection_select.get_chord_or_scale(),
-            self.note_collection_select.get_selected_note_collection_name()
-        )
-        if tuning is None or root is None or None in note_collection:
+        root_note = self.root_select.get_selected_note()
+        chord_or_scale = self.note_collection_select.get_chord_or_scale()
+        if chord_or_scale == 'chord':
+            chord_name = self.note_collection_select.get_selected_note_collection_name()
+            note_collection = Chord(root_note, chord_name)
+        elif chord_or_scale == 'scale':
+            scale_name = self.note_collection_select.get_selected_note_collection_name()
+            note_collection = Scale(root_note, scale_name)
+        else:
+            note_collection = None
+        print(note_collection)
+        print(note_collection.intervals if note_collection is not None else None)
+        orientation = self.orientation_select.get_orientation()
+        print(tuning, type(tuning))
+        if tuning is None or note_collection is None:
             pass
         else:
             if self.fretboard is None or not self.fretboard.winfo_exists():
-                self.fretboard = Fretboard(self, tuning, root, note_collection, 'H')
+                self.fretboard = Fretboard(self, tuning, note_collection, orientation)
             else:
-                self.fretboard.update_fretboard(tuning, root, note_collection)
+                if orientation == self.fretboard.orientation:
+                    self.fretboard.update_fretboard(tuning, note_collection)
+                else:
+                    self.fretboard.destroy()
+                    self.fretboard = Fretboard(self, tuning, root, note_collection, orientation)
 
-
-if __name__ == '__main__':
-    root = tk.Tk()
-    app = MainWindow(root)
-    root.wm_title('MainWindow title str')
-    root.mainloop()
+# if __name__ == '__main__':
+#     root = tk.Tk()
+#     app = MainWindow(root)
+#     root.wm_title('MainWindow title str')
+#     root.mainloop()

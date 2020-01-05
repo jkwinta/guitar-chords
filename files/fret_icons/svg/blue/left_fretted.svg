@@ -14,6 +14,6 @@
     <ns0:rect height="4" id="rect7" style="stroke-width:0.21100175" width="32" x="0" y="293" />
     <ns0:rect height="40" id="rect7-3" style="stroke-width:0.23590714" width="4" x="14" y="257" />
     <ns0:circle cx="32" cy="275" id="path9" r="10" style="stroke-width:1.15617621" />
-    <ns0:circle cx="16" cy="275" id="path9-3" r="8" style="fill:#0087bd;fill-opacity:1;stroke-width:0.61581236" />
+    <ns0:circle cx="16" cy="275" id="path9-3" r="8" style="fill:#0000ff;fill-opacity:1;stroke-width:0.61581236" />
   </ns0:g>
 </ns0:svg>

@@ -1,6 +1,7 @@
 import tkinter as tk
 from guitar_chords.gui.fret import Fret
 from guitar_chords.gui.fret_decoration import FretDecorator
+from guitar_chords.gui.legend import Legend
 
 from guitar_chords.tunings import tunings, Tuning
 from guitar_chords.chords import chords
@@ -9,8 +10,9 @@ from guitar_chords.notes import names_to_semitones, note_name_to_index
 
 
 class Fretboard(tk.Frame):
-    def __init__(self, master, tuning_name, keyed_note_collection,
-                 orientation, number_of_frets=21, number_of_strings=6):
+
+    def __init__(self, master, orientation, number_of_frets=21,
+                 number_of_strings=6, legend=True):
         super().__init__(master)
         #
         self.keyed_note_collection = None
@@ -19,6 +21,8 @@ class Fretboard(tk.Frame):
         self.orientation = orientation
         self.number_of_frets = number_of_frets
         self.number_of_strings = number_of_strings
+        self.legend_arg = legend
+        self.legend = None
 
         self.frets = []
 
@@ -35,8 +39,6 @@ class Fretboard(tk.Frame):
             self.frets.append({'fret_number': fret_number,
                                'string_number': string_number,
                                'fret': fret})
-        # self.pack()
-        self.update_fretboard(tuning_name, keyed_note_collection)
 
     def update_fretboard(self, tuning_name, keyed_note_collection):
         if (self.tuning_name, self.keyed_note_collection) == (
@@ -46,6 +48,9 @@ class Fretboard(tk.Frame):
         self.keyed_note_collection = keyed_note_collection
         self.tuning_name = tuning_name
         self.tuning = Tuning(tuning_name)
+
+        if self.legend_arg:
+            self.legend = Legend(self, self.keyed_note_collection)
 
         for fret_content in self.frets:
             fret_number = fret_content['fret_number']
@@ -64,16 +69,19 @@ class Fretboard(tk.Frame):
     def get_orientation(self):
         return self.orientation
 
+    def get_legend(self):
+        return self.legend
+
 
 class FretboardToplevel(tk.Toplevel):
-    def __init__(self, master, tuning_name, keyed_note_collection,
-                 orientation, number_of_frets=21, number_of_strings=6):
+
+    def __init__(self, master, orientation, number_of_frets=21,
+                 number_of_strings=6, legend=False):
         super().__init__(master)
-        self.fretboard_frame = Fretboard(self, tuning_name,
-                                         keyed_note_collection, orientation,
-                                         number_of_frets, number_of_strings)
+        self.fretboard_frame = Fretboard(self, orientation,
+                                         number_of_frets, number_of_strings,
+                                         legend)
         self.fretboard_frame.pack()
-        self.title(keyed_note_collection)
 
     def update_fretboard(self, tuning_name, keyed_note_collection):
         self.title(str(keyed_note_collection))
@@ -85,3 +93,6 @@ class FretboardToplevel(tk.Toplevel):
 
     def get_orientation(self):
         return self.fretboard_frame.get_orientation()
+
+    def get_legend(self):
+        return self.fretboard_frame.get_legend()

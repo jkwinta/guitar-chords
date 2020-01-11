@@ -15,14 +15,23 @@ class Legend(tk.Frame):
         else:
             self.preferred_colours = preferred_colours
 
-    def get_all_colours(self):
-        if self.all_colours is None:
-            self.all_colours = list(get_colours())
-        return self.all_colours
-
     def get_colour_map(self):
         if self.colour_map is None:
-            colour_order = [colour for colour in self.preferred_colours if colour in self.get_all_colours()] + \
-                           [colour for colour in self.get_all_colours() if colour not in self.preferred_colours]
-            self.colour_map = {note: colour for note, colour in zip(self.notes, colour_order)}
+            colour_order = [colour for colour in self.preferred_colours
+                            if colour in get_colours()] + [
+                               colour for colour in get_colours()
+                               if colour not in self.preferred_colours]
+            self.colour_map = {note: colour for note, colour in
+                               zip(self.notes, colour_order)}
         return self.colour_map
+
+
+class LegendToplevel(tk.Toplevel):
+
+    def __init__(self, master, notes, preferred_colours=None):
+        super().__init__(master)
+        self.legend_frame = Legend(self, notes, preferred_colours)
+        self.legend_frame.pack()
+
+    def get_colour_map(self):
+        return self.legend_frame.get_colour_map()

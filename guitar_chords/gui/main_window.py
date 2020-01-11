@@ -54,16 +54,12 @@ class MainWindow(tk.Frame):
             pass
         else:
             if self.fretboard is None or not self.fretboard.winfo_exists():
-                self.fretboard = FretboardToplevel(self, tuning, note_collection, orientation)
+                self.fretboard = FretboardToplevel(self, orientation)
+                self.fretboard.update_fretboard(tuning, note_collection)
             else:
                 if orientation == self.fretboard.get_orientation():
                     self.fretboard.update_fretboard(tuning, note_collection)
                 else:
                     self.fretboard.destroy()
-                    self.fretboard = FretboardToplevel(self, tuning, note_collection, orientation)
-
-# if __name__ == '__main__':
-#     root = tk.Tk()
-#     app = MainWindow(root)
-#     root.wm_title('MainWindow title str')
-#     root.mainloop()
+                    self.fretboard = FretboardToplevel(self, orientation)
+                    self.fretboard.update_fretboard(tuning, note_collection)

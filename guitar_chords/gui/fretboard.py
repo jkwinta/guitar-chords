@@ -12,7 +12,7 @@ from guitar_chords.notes import names_to_semitones, note_name_to_index
 class Fretboard(tk.Frame):
 
     def __init__(self, master, orientation, number_of_frets=21,
-                 number_of_strings=6, legend=True):
+                 number_of_strings=6):
         super().__init__(master)
         #
         self.keyed_note_collection = None
@@ -21,8 +21,6 @@ class Fretboard(tk.Frame):
         self.orientation = orientation
         self.number_of_frets = number_of_frets
         self.number_of_strings = number_of_strings
-        self.legend_arg = legend
-        self.legend = None
 
         self.frets = []
 
@@ -49,9 +47,6 @@ class Fretboard(tk.Frame):
         self.tuning_name = tuning_name
         self.tuning = Tuning(tuning_name)
 
-        if self.legend_arg:
-            self.legend = Legend(self, self.keyed_note_collection)
-
         for fret_content in self.frets:
             fret_number = fret_content['fret_number']
             string_number = fret_content['string_number']
@@ -69,30 +64,30 @@ class Fretboard(tk.Frame):
     def get_orientation(self):
         return self.orientation
 
-    def get_legend(self):
-        return self.legend
-
 
 class FretboardToplevel(tk.Toplevel):
 
     def __init__(self, master, orientation, number_of_frets=21,
-                 number_of_strings=6, legend=False):
+                 number_of_strings=6):
         super().__init__(master)
         self.fretboard_frame = Fretboard(self, orientation,
-                                         number_of_frets, number_of_strings,
-                                         legend)
+                                         number_of_frets, number_of_strings)
         self.fretboard_frame.pack()
+        self.legend_toplevel = None
+        self.legend = None
 
     def update_fretboard(self, tuning_name, keyed_note_collection):
         self.title(str(keyed_note_collection))
         self.fretboard_frame.update_fretboard(tuning_name, keyed_note_collection
                                               )
+        if self.legend_toplevel is not None:
+            self.legend_toplevel.destroy()
+        self.legend_toplevel = tk.Toplevel(self)
+        self.legend = Legend(self.legend_toplevel, keyed_note_collection)
+        self.legend.pack()
 
     def clear_fretboard(self):
         self.fretboard_frame.clear_fretboard()
 
     def get_orientation(self):
         return self.fretboard_frame.get_orientation()
-
-    def get_legend(self):
-        return self.fretboard_frame.get_legend()

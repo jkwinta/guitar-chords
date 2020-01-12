@@ -14,13 +14,16 @@ class KeyedNoteCollection:
             self.notes.append(IntervalNote(root_name, interval_name))
             if interval_name == 'ROOT':
                 self.root_note = self.notes[-1]
-        if self.root_note is None:
-            self.root_note = IntervalNote(root_name, 'ROOT')
+        # if self.root_note is None:
+        #     self.root_note = IntervalNote(root_name, 'ROOT')
 
         self.chords_contained = None
         self.chords_contained_by = None
         self.scales_contained = None
         self.scales_contained_by = None
+
+    def __len__(self):
+        return len(self.notes)
 
     def contains_note_value(self, note_value):
         return (note_value % 12) in set(n.value for n in self.notes)

@@ -41,6 +41,9 @@ class Legend(tk.Frame):
                                    self.get_colours())}
         return self.colour_map
 
+    def get_note_colour(self, note_value):
+        return self.get_colour_map().get(note_value % 12)
+
     def build_gui(self):
         i = 0
         for colour, note in zip(self.get_colours(),

@@ -11,7 +11,7 @@ class FretImages:
     @staticmethod
     def get_image_base_path():
         if FretImages.image_base_path is None:
-            path = pathlib.Path(__name__).absolute()
+            path = pathlib.Path(__file__).absolute()
             while path != path.parent and path.name != 'guitar_chords':
                 path = path.parent
             FretImages.image_base_path = path.parent / 'files/fret_icons/gif'
